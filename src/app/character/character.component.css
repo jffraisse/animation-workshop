@@ -8,7 +8,6 @@ body {
   bottom: 0;
   width: 100%;
 
-  animation: konami-launch 2s 0s 1;
   transform: translateZ(0); /* permet l'accélération matériel */
 }
 .layout .ryu, .layout .fireball { 
@@ -41,11 +40,6 @@ body {
                      fireball-road 3.7s 5s 1,
                      fireball-animation-road 0.5s steps(4) 5.2s 5,
                      fireball-end 0.2s steps(2) 7.7s 1;
-}
-
-@keyframes konami-launch {
-  0% { bottom: -100px; }
-  100% { bottom: 0px; }
 }
 
 /* RYU */
