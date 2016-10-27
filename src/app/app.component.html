@@ -1,4 +1,5 @@
 <h1>
   {{title}}
 </h1>
-<app-character></app-character>
+<button (click)="isVisible = !isVisible">Toggle</button>
+<app-character [isVisible]="isVisible"></app-character>
