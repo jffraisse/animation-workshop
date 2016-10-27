@@ -42,9 +42,27 @@
 	]
 ```
 
-* Launch animation with Angular 2
-	* create a button to trigger animation in app.component.ts
+
+* create a button to trigger animation in app.component.ts
+
 ```
 <button (click)="isVisible = !isVisible">Toggle</button>
 <app-character [isVisible]="isVisible"></app-character>
 ```
+
+* Use OnChange Class to connect Input value from app.component to character.component
+
+```
+export class CharacterComponent implements OnChanges {
+	visibility = 'shown';
+
+  @Input() isVisible : boolean = true;
+
+  ngOnChanges() {
+  	this.visibility = this.isVisible ? 'hidden' : 'shown';
+  }
+  
+}
+```
+
+
