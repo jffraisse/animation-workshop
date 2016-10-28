@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input, trigger, state, animate, transition, style, keyframes } from '@angular/core';
+import { Component, OnChanges, OnInit, Input, trigger, state, animate, transition, style, keyframes } from '@angular/core';
 
 @Component({
   selector: 'app-character',
@@ -23,13 +23,32 @@ import { Component, OnChanges, Input, trigger, state, animate, transition, style
 	  ])
 	]
 })
-export class CharacterComponent implements OnChanges {
-	visibility = 'shown';
+export class CharacterComponent implements OnInit, OnChanges {
+	visibility;
+	el;
 
   @Input() isVisible : boolean = true;
 
+
+  ngOnInit() {
+		this.el = document.querySelector('.layout');
+  	this.visibility = 'hidden';
+  }
+
   ngOnChanges() {
-  	this.visibility = this.isVisible ? 'hidden' : 'shown';
+  	this.visibility = this.isVisible ? 'shown' : 'hidden';
+  }
+
+  animationStart() {
+  	console.log('i am starting!');
+  }
+
+  animationEnd() {
+  	if (this.visibility === 'shown') {
+  		this.el.classList.add('launch-fireball');
+  	} else {
+  		this.el.classList.remove('launch-fireball');
+  	}
   }
   
 }

@@ -1,7 +1,3 @@
-body {
-  width: 100%;
-  overflow: hidden;
-}
 .layout {
   position: absolute;
   left: 0;
@@ -22,24 +18,28 @@ body {
   left: 0;
   background: url("assets/workshop/sprite.png") 0 0 no-repeat; 
 
-  animation: ryu 2.5s steps(11) 0s 1,
-                     ryu-prepare-fireball 2s steps(12) 3.5s 1,
-                     ryu-launch-fireball 0.5s steps(1) 5s 1,
-                     ryu-launched-fireball 0.5s steps(2) 5.5s 6,
-                     ryu-wind 1s steps(3) 10.5s infinite;              
+  animation: ryu 2.5s steps(11) 0s 1;              
 
   transform: translateZ(0);
 
 }
-.layout .fireball {
+.layout.launch-fireball .fireball {
   position: absolute;
   left: 90px;
   bottom: 0;
 
-  animation: fireball-start 0.2s steps(2) 5s 1,
-                     fireball-road 3.7s 5s 1,
-                     fireball-animation-road 0.5s steps(4) 5.2s 5,
-                     fireball-end 0.2s steps(2) 7.7s 1;
+  animation: fireball-start 0.2s steps(2) 2.5s 1,
+             fireball-road 3.7s 2.5s 1,
+             fireball-animation-road 0.5s steps(4) 2.7s 5,
+             fireball-end 0.2s steps(2) 5.2s 1;
+}
+
+.layout.launch-fireball .ryu {
+
+  animation:  ryu-prepare-fireball 2s steps(12) 1s 1,
+              ryu-launch-fireball 0.5s steps(1) 2.5s 1,
+              ryu-launched-fireball 0.5s steps(2) 3s 6,
+              ryu-wind 1s steps(3) 8s infinite;
 }
 
 /* RYU */
