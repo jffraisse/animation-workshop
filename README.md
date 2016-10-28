@@ -5,15 +5,26 @@
 
 ## Step 1 : A new component to animate
 
-* Create a new component called "character"
+* install npm dependencies
+  * 'npm i'
+
+* create a new component called "character"
 	* 'ng g component character'
 
-* Make it appear into the main app layout 
+* inject html into character component
+
+```
+<div class="layout">
+  <div class="ryu"></div><div class="fireball"></div>
+</div>
+```
+
+* make it appear into the main app layout 
 	* `<app-character></app-character>` dans app.component.html
 
-* Use CSS and HTML from workshop project in your component
+* use CSS and HTML from workshop project in your component
 	* folder 'workshop' dans '/src/assets'
-		* copy and paste sprite.png
+		* copy and paste content of sprite.css into css character component file
 
 ## Step 2 : Using Angular2 animation system
 
@@ -42,8 +53,16 @@
 	]
 ```
 
+* call animation into html Character 
 
-* create a button to trigger animation in app.component.ts
+```
+<div class="layout" [@visibilityChanged]="visibility">
+  <div class="ryu"></div><div class="fireball"></div>
+</div>
+
+```
+
+* create a button to trigger animation in app.component.html
 
 ```
 <button (click)="isVisible = !isVisible">Toggle</button>
@@ -122,10 +141,18 @@ export class CharacterComponent implements OnInit, OnChanges {
 
   @Input() isVisible : boolean = true;
 
-
   ngOnInit() {
 		this.el = document.querySelector('.layout');
   	this.visibility = 'hidden';
+  }
+
+```
+
+* invert visibility valor setup in ngOnChanges element
+
+```
+  ngOnChanges() {
+    this.visibility = this.isVisible ? 'shown' : 'hidden';
   }
 ```
 
