@@ -113,7 +113,7 @@ export class CharacterComponent implements OnChanges {
 }
 ```
 
-	* implement onInit Class to get information needed at animation start
+* implement onInit Class to get information needed at animation start
 
 ```
 export class CharacterComponent implements OnInit, OnChanges {
