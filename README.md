@@ -144,3 +144,5 @@ export class CharacterComponent implements OnInit, OnChanges {
   	}
   }
 ```
+
+# Step 4 : And so on !
