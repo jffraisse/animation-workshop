@@ -5,6 +5,9 @@
 
 ## Step 1 : A new component to animate
 
+* checkout project in your test folder
+  * 'git clone git@github.com:jffraisse-fa/animation-workshop.git'
+
 * install npm dependencies
   * 'npm i'
 
@@ -31,6 +34,20 @@
 * Adapt CSS animation 'konami-launch' with Angular system
 	* delete previous one in CSS
 	* call animation in component metadata with correct parameters
+
+
+```javascript
+  animations: [
+    trigger('visibilityChanged', [
+      state('shown' , style({opacity: 1, transform: 'translateY(0)'})),
+      state('hidden', style({opacity: 0, transform: 'translateY(100px)'})),
+      transition('* => *', [
+        animate('1000ms ease-out')
+      ]),
+    ])
+  ]
+```
+
 
 ```javascript
 	animations: [
@@ -97,8 +114,8 @@ export class CharacterComponent implements OnChanges {
 </div>
 ```
 
-* Adapt character component behavior 
-	* change CSS rules to get control of launching fireball animation step
+* Adapt character component behavior
+	* change CSS rules to get control of launching fireball animation steps
 
 ```
 .layout .ryu {
@@ -172,4 +189,26 @@ export class CharacterComponent implements OnInit, OnChanges {
   }
 ```
 
-## Step 4 : And so on !
+## Step 4 : Trigger fireball launching with angular animation
+
+
+```javascript
+  animations: [
+    trigger('visibilityChanged', [
+      state('shown' , style({opacity: 1, transform: 'translateY(0)'})),
+      state('hidden', style({opacity: 0, transform: 'translateY(100px)'})),
+      transition('shown => hidden', [
+        animate(1000, keyframes([
+          style({opacity: 1, transform: 'translateY(0)', offset: 0}),
+          style({opacity: 0, transform: 'translateY(100px)', offset: 1.0})
+        ]))
+      ]),
+      transition('hidden => shown', [
+        animate(1000, keyframes([
+          style({opacity: 0, transform: 'translateY(100px)', offset: 0}),
+          style({opacity: 1, transform: 'translateY(0)',     offset: 1.0})
+        ]))
+      ]),
+    ])
+  ]
+```

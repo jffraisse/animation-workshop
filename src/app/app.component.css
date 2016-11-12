@@ -10,3 +10,38 @@ body {
 h1 {
 	color: white;
 }
+
+.layout .ryu, .layout .fireball { 
+  width: 122px;
+  height: 88px;
+  background: url("assets/workshop/sprite.png") right 0 no-repeat; 
+}
+
+.layout.launch-fireball .fireball {
+  position: absolute;
+  left: 90px;
+  bottom: 0;
+
+  animation: fireball-start 0.2s steps(2) 1.7s 1,
+             fireball-road 3s 1.7s 1,
+             fireball-animation-road 0.5s steps(4) 1.9s 5,
+             fireball-end 0.2s steps(2) 4.5s 1;
+}
+/* Fireball */
+
+@keyframes fireball-start {
+  0% { background-position: -488px 0; }
+  100% { background-position: -488px -176px; }
+}
+@keyframes fireball-road {
+  0% { left: 90px; }
+  100% { left: 95%; }
+}
+@keyframes fireball-animation-road {
+  0% { background-position: -488px -176px; }
+  100% { background-position: -488px -528px; }
+}
+@keyframes fireball-end {
+  0% { background-position: -488px -528px; }
+  100% { background-position: -488px -880px; }
+}

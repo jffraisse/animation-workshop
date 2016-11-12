@@ -23,23 +23,14 @@
   transform: translateZ(0);
 
 }
-.layout.launch-fireball .fireball {
-  position: absolute;
-  left: 90px;
-  bottom: 0;
 
-  animation: fireball-start 0.2s steps(2) 2.5s 1,
-             fireball-road 3.7s 2.5s 1,
-             fireball-animation-road 0.5s steps(4) 2.7s 5,
-             fireball-end 0.2s steps(2) 5.2s 1;
-}
 
 .layout.launch-fireball .ryu {
 
-  animation:  ryu-prepare-fireball 2s steps(12) 1s 1,
-              ryu-launch-fireball 0.5s steps(1) 2.5s 1,
-              ryu-launched-fireball 0.5s steps(2) 3s 6,
-              ryu-wind 1s steps(3) 8s infinite;
+  animation:  ryu-prepare-fireball 1.5s steps(12) .2s 1,
+              ryu-launch-fireball 0.5s steps(1) 1.7s 1,
+              ryu-launched-fireball 0.5s steps(2) 2.2s 6,
+              ryu-wind 1s steps(3) 7.2s infinite;
 }
 
 /* RYU */
@@ -63,23 +54,4 @@
 @keyframes ryu-wind {
   0% { background-position: -122px -440px; }
   100% { background-position: -122px -704px; }
-}
-
-/* Fireball */
-
-@keyframes fireball-start {
-  0% { background-position: -488px 0; }
-  100% { background-position: -488px -176px; }
-}
-@keyframes fireball-road {
-  0% { left: 90px; }
-  100% { left: 95%; }
-}
-@keyframes fireball-animation-road {
-  0% { background-position: -488px -176px; }
-  100% { background-position: -488px -528px; }
-}
-@keyframes fireball-end {
-  0% { background-position: -488px -528px; }
-  100% { background-position: -488px -880px; }
 }
