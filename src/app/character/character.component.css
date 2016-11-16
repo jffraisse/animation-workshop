@@ -6,22 +6,22 @@
 
   transform: translateZ(0); /* permet l'accélération matériel */
 }
-.layout .ryu, .layout .fireball { 
+.ryu, .fireball { 
   width: 122px;
   height: 88px;
   background: url("assets/workshop/sprite.png") right 0 no-repeat; 
 }
 
-.layout .ryu {
+.ryu {
   position: absolute;
   bottom: 0;
   left: 0;
-  background: url("assets/workshop/sprite.png") 0 0 no-repeat; 
-
-  animation: ryu 2.5s steps(11) 0s 1;              
-
+  background: url("assets/workshop/sprite.png") 0 0 no-repeat;              
   transform: translateZ(0);
+}
 
+.ryu.prepare {
+  animation: ryu 2.5s steps(11) 0s 1; 
 }
 
 

@@ -1,7 +1,9 @@
 <div class="layout"
-	(@visibilityChanged.start)="animationStart($event)"
+	(@visibilityChanged.done)="animationEnd($event)"
 	[@visibilityChanged]="visibility"
 	#layout>
-	<div class="ryu"></div><div class="fireball" #fireball></div>
+	<div class="ryu" #ryu></div>
 </div>
-<h1>{{visibility}} --- {{fireballEvent}}</h1>
+
+<button (click)="launch()">Fire</button>
+<h1>{{visibility}}</h1>

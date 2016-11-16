@@ -1,4 +1,4 @@
-# AnimationWorkshop
+# Animation Workshop
 
 
 1 hour workshop to understand how Angular animation system works
@@ -23,17 +23,17 @@
 ```
 
 * make it appear into the main app layout 
-	* `<app-character></app-character>` dans app.component.html
+	* `<app-character></app-character>` into app.component.html
 
 * use CSS and HTML from workshop project in your component
-	* folder 'workshop' dans '/src/assets'
-		* copy and paste content of sprite.css into css character component file
+	* folder 'workshop' into '/src/assets'
+		* copy and paste content of sprite.css into css character's component file
 
 ## Step 2 : Using Angular2 animation system
 
 * Adapt CSS animation 'konami-launch' with Angular system
 	* delete previous one in CSS
-	* call animation in component metadata with correct parameters
+	* describe animation in component metadata
 
 
 ```javascript
@@ -70,7 +70,20 @@
 	]
 ```
 
-* call animation into html Character 
+  * this is a shorter way to create same transition
+
+```javascript
+  animations: [
+    trigger('visibilityChanged', [
+      state('shown' , style({opacity: 1, transform: 'translateY(0)'})),
+      state('hidden', style({opacity: 0, transform: 'translateY(100px)'})),
+      transition('shown => hidden', [animate('1000ms ease-out')]),
+      transition('hidden => shown', [animate('1000ms ease-out')]),
+    ]),
+  ]
+```
+
+* call animation into character's layout
 
 ```
 <div class="layout" [@visibilityChanged]="visibility">
@@ -86,7 +99,7 @@
 <app-character [isVisible]="isVisible"></app-character>
 ```
 
-* Use OnChange Class to connect Input value from app.component to character.component
+* Use OnChange to fire event into angular animation
 
 ```
 export class CharacterComponent implements OnChanges {
@@ -101,9 +114,9 @@ export class CharacterComponent implements OnChanges {
 }
 ```
 
-## Step 3 : Use animation angular lifeCycle to decompose each steps of character mooves
+## Step 3 : Trigger fireball launching with angular animation
 
-* Use animate angular events to control animation firing steps
+* Use animate angular's events to control animation steps
 
 ```
 <div class="layout"
@@ -114,7 +127,24 @@ export class CharacterComponent implements OnChanges {
 </div>
 ```
 
-* Adapt character component behavior
+
+* bind animationStart and animationEnd functions with character component
+
+```
+  animationStart() {
+    console.log('i am starting!');
+  }
+
+  animationEnd() {
+    if (this.visibility === 'shown') {
+      this.el.classList.add('launch-fireball');
+    } else {
+      this.el.classList.remove('launch-fireball');
+    }
+  }
+```
+
+* Adapt character component behaviors
 	* change CSS rules to get control of launching fireball animation steps
 
 ```
@@ -149,7 +179,7 @@ export class CharacterComponent implements OnChanges {
 }
 ```
 
-* implement onInit Class to get information needed at animation start
+* implement onInit Class to setup some starting parameters
 
 ```
 export class CharacterComponent implements OnInit, OnChanges {
@@ -165,50 +195,10 @@ export class CharacterComponent implements OnInit, OnChanges {
 
 ```
 
-* invert visibility valor setup in ngOnChanges element
+* revert animation cycle in OnChanges parameters
 
 ```
   ngOnChanges() {
     this.visibility = this.isVisible ? 'shown' : 'hidden';
   }
-```
-
-* bind animationStart and animationEnd functions with character component and use it to launch fireball
-
-```
-  animationStart() {
-  	console.log('i am starting!');
-  }
-
-  animationEnd() {
-  	if (this.visibility === 'shown') {
-  		this.el.classList.add('launch-fireball');
-  	} else {
-  		this.el.classList.remove('launch-fireball');
-  	}
-  }
-```
-
-## Step 4 : Trigger fireball launching with angular animation
-
-
-```javascript
-  animations: [
-    trigger('visibilityChanged', [
-      state('shown' , style({opacity: 1, transform: 'translateY(0)'})),
-      state('hidden', style({opacity: 0, transform: 'translateY(100px)'})),
-      transition('shown => hidden', [
-        animate(1000, keyframes([
-          style({opacity: 1, transform: 'translateY(0)', offset: 0}),
-          style({opacity: 0, transform: 'translateY(100px)', offset: 1.0})
-        ]))
-      ]),
-      transition('hidden => shown', [
-        animate(1000, keyframes([
-          style({opacity: 0, transform: 'translateY(100px)', offset: 0}),
-          style({opacity: 1, transform: 'translateY(0)',     offset: 1.0})
-        ]))
-      ]),
-    ])
-  ]
 ```

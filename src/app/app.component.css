@@ -11,21 +11,21 @@ h1 {
 	color: white;
 }
 
-.layout .ryu, .layout .fireball { 
+.fireball { 
   width: 122px;
   height: 88px;
   background: url("assets/workshop/sprite.png") right 0 no-repeat; 
 }
 
-.layout.launch-fireball .fireball {
+.launched.fireball {
   position: absolute;
   left: 90px;
   bottom: 0;
 
-  animation: fireball-start 0.2s steps(2) 1.7s 1,
-             fireball-road 3s 1.7s 1,
-             fireball-animation-road 0.5s steps(4) 1.9s 5,
-             fireball-end 0.2s steps(2) 4.5s 1;
+  animation: fireball-start 0.2s steps(2) 0s 1,
+             fireball-road 3s 0s 1,
+             fireball-animation-road 0.5s steps(4) 0.2s 5,
+             fireball-end 0.2s steps(2) 2.8s 1;
 }
 /* Fireball */
 
