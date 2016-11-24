@@ -1,17 +1,14 @@
-
-import { Component, OnChanges, OnInit, Input, 
-         trigger, state, animate, transition, style, 
-         Renderer, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnChanges, OnInit, Input, trigger, state, animate, transition, style, keyframes } from '@angular/core';
 
 @Component({
   selector: 'app-character',
   templateUrl: './character.component.html',
   styleUrls: ['./character.component.css'],
-  encapsulation: ViewEncapsulation.None,
   animations: [
 	  trigger('visibilityChanged', [
 	    state('shown' , style({opacity: 1, transform: 'translateY(0)'})),
 	    state('hidden', style({opacity: 0, transform: 'translateY(100px)'})),
+
       transition('shown => hidden', [animate('1000ms ease-out')]),
       transition('hidden => shown', [animate('1000ms ease-out')]),
 	  ]),

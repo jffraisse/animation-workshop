@@ -6,6 +6,7 @@
 
   transform: translateZ(0); /* permet l'accélération matériel */
 }
+
 .ryu, .fireball { 
   width: 122px;
   height: 88px;
@@ -54,4 +55,23 @@
 @keyframes ryu-wind {
   0% { background-position: -122px -440px; }
   100% { background-position: -122px -704px; }
+}
+
+/* Fireball */
+
+@keyframes fireball-start {
+  0% { background-position: -488px 0; }
+  100% { background-position: -488px -176px; }
+}
+@keyframes fireball-road {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(95em, 0, 0); }
+}
+@keyframes fireball-animation-road {
+  0% { background-position: -488px -176px; }
+  100% { background-position: -488px -528px; }
+}
+@keyframes fireball-end {
+  0% { background-position: -488px -528px; }
+  100% { background-position: -488px -880px; }
 }

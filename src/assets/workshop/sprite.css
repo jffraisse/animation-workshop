@@ -78,8 +78,8 @@ body {
   100% { background-position: -488px -176px; }
 }
 @keyframes fireball-road {
-  0% { left: 90px; }
-  100% { left: 95%; }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(95em, 0, 0); }
 }
 @keyframes fireball-animation-road {
   0% { background-position: -488px -176px; }
