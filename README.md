@@ -1,16 +1,16 @@
-![Animate with angular](https://github.com/jffraisse/animation-workshop/raw/master/src/assets/workshop/animateWithAngular.png)
+![Animate with Angular](https://github.com/jffraisse/animation-workshop/raw/master/src/assets/workshop/animateWithAngular.png)
 
 ## Disclaimer
 
-The purpose of this workshop is to provide a cool way to learn and use animations in Angular 2.
-You will have to animate a character using Angular2 differents methods. 
+The purpose of this workshop is to provide a cool way to learn tricks about practicing animations in Angular 2.
+You're gonna animate a character and decompose steps of its existing lifecycle previously code in CSS. 
 Materials are given in the src/assets/workshop folder of this repository, a sprite.png and a stylesheet (sprite.css).
 You can check sources at the end of this document if you want to learn more about different technics i used.
-Maybe it's not the best practice for animating layouts but anyway, it's funnier than regular tutorial so let's get it on!
+Now let's get it on!
 
-* First of all download angular-cli as global dependency 
+* First of all download and install Angular-cli as global dependency 
 
- 'npm install -g angular-cli'
+ 'npm install -g Angular-cli'
 
 ## Step 1 : A new component to animate
 
@@ -26,7 +26,7 @@ Maybe it's not the best practice for animating layouts but anyway, it's funnier 
 * create a new component called "character"
 	* 'ng g component character'
 
-* inject html into character component
+* add some HTML into character component to compose layers for animation
 
 ```
 <div class="layout">
@@ -37,15 +37,14 @@ Maybe it's not the best practice for animating layouts but anyway, it's funnier 
 * make it appear into the main app layout 
 	* `<app-character></app-character>` into app.component.html
 
-* use CSS and HTML from workshop project in your component
+* copy and paste content of sprite.css into css character's component stylesheet
 	* folder 'workshop' into '/src/assets'
-		* copy and paste content of sprite.css into css character's component stylesheet
 
 * start app with 'ng serve' in command prompt and check result in http://localhost:4200
 
-## Step 2 : Using Angular2 animation system
+## Step 2 : Using Angular 2 animation system
 
-* Adapt CSS animation 'konami-launch' with Angular system
+* Adapt CSS animation 'konami-launch' with animate API
 	* Remove "konami-launch" CSS animation call into "layout" class
 
 ```
@@ -57,17 +56,17 @@ Maybe it's not the best practice for animating layouts but anyway, it's funnier 
 
   // remove or comment
   // animation: konami-launch 2s 0s 1;
-  transform: translateZ(0); /* permet l'accélération matériel */
+  transform: translateZ(0);
 }
 ```
 
-  * import animation utilities from angular core
+  * import animation utilities from Angular core
 
 ```
 import { Component, OnInit, OnChanges, Input, style, trigger, state, transition, keyframes, animate } from '@angular/core';
 ```
 
-	* describe animation in character component metadata
+  * describe animation in character component metadata
 
 ```javascript
 	animations: [
@@ -119,7 +118,7 @@ import { Component, OnInit, OnChanges, Input, style, trigger, state, transition,
 <app-character [isVisible]="isVisible"></app-character>
 ```
 
-* Use OnChange to fire event into angular animation
+* Use OnChange to fire event into Angular animation
 
 ```
 export class CharacterComponent implements OnInit, OnChanges {
@@ -136,21 +135,25 @@ export class CharacterComponent implements OnInit, OnChanges {
 }
 ```
 
-## Step 3 : Trigger fireball launching with angular animation
+## Step 3 : Trigger fireball launching with Angular animation callback
 
-* Use angular animation's events to chain moves
+* use ngOnInit to cache layout element 
 
 ```
-<div class="layout"
-	(@visibilityChanged.start)="animationStart($event)"
-	(@visibilityChanged.done)="animationEnd($event)"
-	[@visibilityChanged]="visibility">
-	<div class="ryu"></div><div class="fireball"></div>
-</div>
+export class CharacterComponent implements OnInit, OnChanges {
+  visibility;
+  el;
+
+  @Input() isVisible : boolean = true;
+
+  ngOnInit() {
+    this.el = document.querySelector('.layout');
+    this.visibility = 'hidden';
+  }
 ```
 
-
-* bind animationStart and animationEnd functions with character component
+* create functions to handle starting and finishing steps.
+  * add 'launch-fireball' css class into character component when visibility animation is done 
 
 ```
   animationStart() {
@@ -166,8 +169,18 @@ export class CharacterComponent implements OnInit, OnChanges {
   }
 ```
 
-* Adapt character component behaviors
-	* change CSS rules to get control of launching fireball animation steps
+* bind animationStart and animationEnd functions with character component view
+
+```
+<div class="layout"
+  (@visibilityChanged.start)="animationStart($event)"
+  (@visibilityChanged.done)="animationEnd($event)"
+  [@visibilityChanged]="visibility">
+  <div class="ryu"></div><div class="fireball"></div>
+</div>
+```
+
+* change CSS rules to get control of launching fireball animation steps
 
 ```
 .layout .ryu {
@@ -201,35 +214,16 @@ export class CharacterComponent implements OnInit, OnChanges {
 }
 ```
 
-* implement onInit class to setup starting parameters
-
-```
-export class CharacterComponent implements OnInit, OnChanges {
-  visibility;
-  el;
-
-  @Input() isVisible : boolean = true;
-
-  ngOnInit() {
-    this.el = document.querySelector('.layout');
-    this.visibility = 'hidden';
-  }
-
-  ...
-
-}
-```
-
 ## Going further
 
 * You can check 'advanced' branch to see how to deal with a more complicated use case, with some comments in code too.
   * 'git checkout advanced'
 
 
-
 Sources:
 
 [Angular animation documentation](https://angular.io/docs/ts/latest/guide/animations.html)
+
 [Thomas Burleson nice blog post](http://blog.thoughtram.io/angular/2016/09/16/angular-2-animation-important-concepts.html)
 
 Feel free to contact me on Twitter [@Jeffwebdesign](https://twitter.com/Jeffwebdesign) if you have any questions, remarks about this workshop.
