@@ -1,5 +1,7 @@
-import { Component, OnChanges, OnInit, Input, trigger, state, animate, transition, style, keyframes } from '@angular/core';
-
+import { Component, OnChanges, OnInit, Input, 
+         trigger, state, animate, transition, style, 
+         Renderer, ViewChild, ViewEncapsulation } from '@angular/core';
+         
 @Component({
   selector: 'app-character',
   templateUrl: './character.component.html',
