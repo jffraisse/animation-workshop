@@ -6,7 +6,7 @@ The purpose of this workshop is to provide a cool way to learn and use animation
 You will have to animate a character using Angular2 differents methods. 
 Materials are given in the src/assets/workshop folder of this repository, a sprite.png and a stylesheet (sprite.css).
 You can check sources at the end of this document if you want to learn more about different technics i used.
-Maybe it's not the best practice for animating layouts but anyway, it's funnier than regular tutorial so let's get it on!
+Now let's get it on!
 
 * First of all download angular-cli as global dependency 
 
